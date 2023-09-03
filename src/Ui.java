@@ -8,24 +8,27 @@ import java.io.File;
 public class Ui extends JFrame{
     private String Path;
  Ui(){
-     setSize(500,200);
+     setSize(500,400);
      JLabel selectedFilesLabel = new JLabel("Selected Files");
      JButton selectButton = new JButton("Select Files");
      JButton submitButton = new JButton("Submit");
-     JComboBox<String> fileNamesList = new JComboBox<>();
+     JTextArea fileNames = new JTextArea();
+//     JComboBox<String> fileNamesList = new JComboBox<>();
      Font fontNormal = new Font("Arial",Font.PLAIN,16);
-     selectedFilesLabel.setBounds(150,100,200,30);
+     selectedFilesLabel.setBounds(150,60,200,30);
      selectButton.setBounds(175,20,150,30);
-     submitButton.setBounds(100,100,80,30);
-     fileNamesList.setBounds(200,100,200,30);
+     submitButton.setBounds(210,300,80,30);
+     fileNames.setBounds(75,60,350,230);
+//     fileNamesList.setBounds(200,100,200,30);
      selectedFilesLabel.setFont(fontNormal);
      selectedFilesLabel.setHorizontalAlignment(selectedFilesLabel.CENTER);
-     add(fileNamesList);
+     fileNames.setEditable(false);
+     fileNames.setText(this.Path);
+//     add(fileNamesList);
+     add(fileNames);
      add(selectedFilesLabel);
      add(selectButton);
      add(submitButton);
-
-
      selectFileWindow(selectButton);
      submitFiles(submitButton);
      setLayout(null);
@@ -61,9 +64,10 @@ public class Ui extends JFrame{
      return this.Path;
     }
 
-    public static void submitFiles(JButton submit){
+    public void submitFiles(JButton submit){
      submit.addActionListener((e) -> {
          System.out.println("clicked");
+         System.out.println(this.Path);
      });
  }
 
