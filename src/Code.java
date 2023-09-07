@@ -70,9 +70,8 @@ public class Code {
     public static void compileCode(ArrayList<String> parsedName) throws IOException{
 
         ProcessBuilder processBuilder = new ProcessBuilder("g++",parsedName.get(2)+parsedName.get(0) + "." + parsedName.get(1),"-o",parsedName.get(2) + "a");
-        Process process = null;
         try {
-            process = processBuilder.start();
+            processBuilder.start();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

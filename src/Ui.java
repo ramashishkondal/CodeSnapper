@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Ui extends JFrame{
-    private ArrayList<String> paths = new ArrayList<>(9);
-    private JTextArea fileNames = new JTextArea();
+    private final ArrayList<String> paths = new ArrayList<>(9);
+    private final JTextArea fileNames = new JTextArea();
  Ui(){
      setSize(500,400);
      JLabel selectedFilesLabel = new JLabel("Selected Files");
@@ -50,8 +50,8 @@ public class Ui extends JFrame{
      submit.addActionListener((e) -> {
 
                  synchronized (paths) {
-                     for (int i = 0; i < this.paths.size(); i++) {
-                         other.fileManagement(paths.get(i));
+                     for (String path : this.paths) {
+                         other.fileManagement(path);
                      }
                      System.out.println(paths);
                  }
