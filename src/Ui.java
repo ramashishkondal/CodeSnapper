@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Ui extends JFrame{
-    private ArrayList<String> path = new ArrayList<>(9);
+    private ArrayList<String> paths = new ArrayList<>(9);
     private JTextArea fileNames = new JTextArea();
  Ui(){
      setSize(500,400);
@@ -46,7 +46,17 @@ public class Ui extends JFrame{
 
 
     public void submitFiles(JButton submit){
-     submit.addActionListener((e) -> System.out.println("clicked"));
+     Code other = new Code();
+     submit.addActionListener((e) -> {
+
+                 synchronized (paths) {
+                     for (int i = 0; i < this.paths.size(); i++) {
+                         other.fileManagement(paths.get(i));
+                     }
+                     System.out.println(paths);
+                 }
+     }
+     );
  }
 
  public void selectedPath(JFileChooser fileChooser,JFrame frame){
@@ -56,11 +66,14 @@ public class Ui extends JFrame{
          frame.dispose();
          //path
          fileNames.append(selectedFile.getAbsolutePath() + "\n");
-         path.add(selectedFile.getAbsolutePath());
+         paths.add(selectedFile.getAbsolutePath());
      }
      frame.dispose();
  }
+ public ArrayList<String> getPaths(){
+     return this.paths;
+ }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Ui::new);
     }
 }
